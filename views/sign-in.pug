@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  form#SignIn(action="" method="POST")
+    label(for="username") Username
+    input(type="text" name="username")
+    label(for="password") Password
+    input(type="text" name="password")
+    button(type="submit") Log In
+  
+  if message 
+    p= message

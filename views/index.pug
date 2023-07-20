@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  h2= `User: ${user ? user.username: "Guest"}`
+
+  if !user 
+    div
+      a(href="/sign-in") Sign in
+      hr
+      a(href="/sign-up") Sign up
+  if user
+    a(href="/sign-out") Sign out
+  div.comments-container 
+    h2 Comments here!
