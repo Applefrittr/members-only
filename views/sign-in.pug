@@ -4,10 +4,11 @@ block content
   h1= title
   form#SignIn(action="" method="POST")
     label(for="username") Username
-    input(type="text" name="username")
+    input(type="text" name="username" required)
     label(for="password") Password
-    input(type="text" name="password")
+    input(type="password" name="password" required)
     button(type="submit") Log In
+    a(href="/") Cancel
   
-  if message 
-    p= message
+  if session.messages
+    p= session.messages[session.messages.length - 1]

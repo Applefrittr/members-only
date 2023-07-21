@@ -3,23 +3,18 @@ const router = express.Router();
 
 const userController = require("../controllers/user-controller");
 
-// Home page GET
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "The Clubhouse", user: req.user });
-});
+////               Home page GET            ////
+router.get("/", userController.home);
 
-router.get("/sign-in", (req, res, next) => {
+////              Sign in page GET and POST         ////
+router.get("/sign-in", userController.sign_in_GET);
+router.post("/sign-in", userController.sign_in_POST);
 
-  res.render("sign-in", { title: "Sign In"});
-});
+////              Sign up page GET and POST         ////
+router.get("/sign-up", userController.sign_up_GET);
+router.post("/sign-up", userController.sign_up_POST);
 
-// router.post("/sign-in") moved to app.js to work with passport
-router.post("/sign-in", userController.sign_in);
-
-router.get("/sign-up", (req, res, next) => {
-  res.render("sign-up", { title: "Sign Up" });
-});
-
-router.post("/sign-up", userController.sign_up);
+////               Log out GET                   ////
+router.get("/sign-out", userController.log_out);
 
 module.exports = router;

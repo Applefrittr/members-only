@@ -4,8 +4,33 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
+// Home/Index GET route controller
+exports.home = (req, res, next) => {
+  // pass the session user to views supplied by Passport
+  req.session.messages = []; // clear session messages array
+  res.render("index", { title: "The Clubhouse", user: req.user });
+};
+
+// Sign-in GET route controller
+exports.sign_in_GET = (req, res, next) => {
+  // pass the session to views to gain access to session messages (error messages pushed by Passport stored here)
+  res.render("sign-in", { title: "Sign In", session: req.session });
+};
+
+// Sign in POST route controller callback - Passport authenticate the user
+exports.sign_in_POST = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/sign-in",
+  failureMessage: true,
+});
+
+// Sign up GET route controller
+exports.sign_up_GET = (req, res, next) => {
+  res.render("sign-up", { title: "Sign Up" });
+};
+
 // Sign-up POST route controller
-exports.sign_up = [
+exports.sign_up_POST = [
   // Validations first
   body("username", "Username must be at least 3 characters long")
     .trim()
@@ -62,8 +87,12 @@ exports.sign_up = [
   }),
 ];
 
-// Sign in POST route controller callback
-exports.sign_in = passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/sign-in",
-});
+// Log out GET controller
+exports.log_out = (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
