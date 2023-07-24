@@ -1,15 +1,41 @@
 extends layout
 
 block content
-  h1= title
-  h2= `User: ${user ? user.username: "Guest"}`
 
-  if !user 
-    div
-      a(href="/sign-in") Sign in
-      hr
-      a(href="/sign-up") Sign up
-  if user
-    a(href="/sign-out") Sign out
+  div.nav-bar
+    h1= title
+    div.user-controls
+      h2= `${user ? user.username: "Guest"}`
+      if !user 
+        div.user-links
+          a(href="/sign-in") Sign in
+          a(href="/sign-up") Sign up
+      if user
+        div.user-links
+          if !user.isMember
+            a(href="/membership") Become a Member
+          else 
+            p #[Strong Member]
+          a(href="/sign-out") Sign out
   div.comments-container 
-    h2 Comments here!
+    div.comments-header
+      h2 Comments here!
+      if user
+        div.new-comment
+          a(href="/new-comment") +  New Comment
+    
+    if commentList
+      for comment in commentList
+        div.comment
+          div.comment-header
+            if user && user.username === comment.user.username
+              h2 Me
+            else if user && user.isMember
+              h2= `${comment.user.username} - ${comment.user.isMember ? "MEMBER" : "Guest"}`
+            else
+              h2 <em>Anonymous</em>
+            if user && user.isMember  
+              p= `posted: ${comment.dated_formatted}`
+          hr
+          p= comment.text
+    

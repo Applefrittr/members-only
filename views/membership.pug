@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  h1= `Become a member: ${user.username}`
+  hr 
+  form#membership(action="" method="POST")
+    label(for="code") What is the secret code?
+    input(type="text" required name="code")
+    button(type="submit") Submit
+    a(href="/") Cancel
+  
+  if errors
+    ul
+      for error in errors 
+        li= error.msg

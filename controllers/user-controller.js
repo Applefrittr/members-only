@@ -1,15 +1,21 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/user");
+const Comment = require("../models/comment");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // Home/Index GET route controller
-exports.home = (req, res, next) => {
+exports.home = asyncHandler(async (req, res, next) => {
   // pass the session user to views supplied by Passport
   req.session.messages = []; // clear session messages array
-  res.render("index", { title: "The Clubhouse", user: req.user });
-};
+  const commentList = await Comment.find()
+    .populate("user")
+    .sort({ dated: -1 })
+    .exec();
+  console.log(commentList);
+  res.render("index", { title: "The Clubhouse", user: req.user, commentList });
+});
 
 // Sign-in GET route controller
 exports.sign_in_GET = (req, res, next) => {
@@ -96,3 +102,32 @@ exports.log_out = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+// Membership GET controller
+exports.membership_GET = (req, res, next) => {
+  res.render("membership", { user: req.user });
+};
+
+// Membership POST controller
+exports.membership_POST = [
+  body("code", "Incorrect passcode")
+    .trim()
+    .custom((value) => {
+      return value === process.env.MEMBERSHIP;
+    })
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    console.log(process.env.MEMBERSHIP);
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      console.log(errors, errors.array());
+      res.render("membership", { errors: errors.array(), user: req.user });
+    } else {
+      const user = await User.findById(req.user._id);
+      user.isMember = true;
+      await user.save();
+      res.redirect("/");
+    }
+  }),
+];

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const userController = require("../controllers/user-controller");
+const commentController = require("../controllers/comment-controller");
 
 ////               Home page GET            ////
 router.get("/", userController.home);
@@ -16,5 +17,13 @@ router.post("/sign-up", userController.sign_up_POST);
 
 ////               Log out GET                   ////
 router.get("/sign-out", userController.log_out);
+
+////               Become Member GET and POST            ////
+router.get("/membership", userController.membership_GET);
+router.post("/membership", userController.membership_POST);
+
+////               New Comment GET and POST             ////
+router.get("/new-comment", commentController.new_comment_GET);
+router.post("/new-comment", commentController.new_comment_POST);
 
 module.exports = router;

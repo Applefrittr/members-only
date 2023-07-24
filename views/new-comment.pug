@@ -1,0 +1,14 @@
+extends layout 
+
+block content
+  h1= `New Comment for ${user.username}`
+  form#newComment(action="" method="POST")
+    label(for="text") Comment 
+    textarea(name="text" required rows="5" cols="50")
+    button(type="submit") Submit
+
+  if errors
+    ul
+      for error in errors 
+        li= error.msg
+    

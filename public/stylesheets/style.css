@@ -1,8 +1,15 @@
+@import url("./index.css");
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+  padding: .6rem 1rem;
+  border: 1px solid rgb(0, 183, 255);
+  border-radius: 15px;
+  background-color: whitesmoke;
 }

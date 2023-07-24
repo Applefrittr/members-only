@@ -1,0 +1,41 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: beige;
+}
+
+.user-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.user-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.comments-container {
+    padding: 2rem;
+}
+
+.comments-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.comment {
+    padding: 1rem;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin: .5rem;
+    border: 1px solid blue;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+}
