@@ -1,14 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  form#SignIn(action="" method="POST")
+  form#SignIn.forms(action="" method="POST")
+    h1= title
     label(for="username") Username
     input(type="text" name="username" required)
     label(for="password") Password
     input(type="password" name="password" required)
     button(type="submit") Log In
     a(href="/") Cancel
+    p.form-label The Clubhouse
   
-  if session.messages
-    p= session.messages[session.messages.length - 1]
+  if session.messages.length > 0
+    p.error-container= session.messages[session.messages.length - 1]

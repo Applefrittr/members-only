@@ -15,23 +15,23 @@ block content
           if !user.isMember
             a(href="/membership") Become a Member
           else 
-            p #[Strong Member]
+            h2(style="color: #00B7FF") #[Strong Club Member]
           a(href="/sign-out") Sign out
   div.comments-container 
     div.comments-header
-      h2 Comments here!
+      h2 Messages
       if user
         div.new-comment
-          a(href="/new-comment") +  New Comment
+          a.new-comment-btn(href="/new-comment") +  New Comment
     
     if commentList
       for comment in commentList
         div.comment
           div.comment-header
             if user && user.username === comment.user.username
-              h2 Me
+              h2 <em style="color:#00B7FF">Me</em>
             else if user && user.isMember
-              h2= `${comment.user.username} - ${comment.user.isMember ? "MEMBER" : "Guest"}`
+              h2= `${comment.user.username} - ${comment.user.isMember ? "Club Member" : "Guest"}`
             else
               h2 <em>Anonymous</em>
             if user && user.isMember  

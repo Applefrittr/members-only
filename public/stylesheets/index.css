@@ -1,8 +1,11 @@
 .nav-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1rem;
-    background-color: beige;
+    background-color: black;
+    color: white;
+    align-items: center;
+    width: 100%;
 }
 
 .user-controls {
@@ -19,23 +22,31 @@
 
 .comments-container {
     padding: 2rem;
+    width: 75%;
 }
 
 .comments-header {
     display: flex;
     gap: 1rem;
+    justify-content: center;
     align-items: center;
 }
 
 .comment {
     padding: 1rem;
-    background-color: lightblue;
+    background-color: lightcyan;
     border-radius: 10px;
     margin: .5rem;
-    border: 1px solid blue;
+    border: 1px solid black;
 }
 
 .comment-header {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 600px){
+    .comments-container {
+        width: 90%;
+    }
 }

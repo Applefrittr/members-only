@@ -1,0 +1,26 @@
+.forms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: relative;
+}
+
+.form-label {
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    padding: 5px 5px;
+    background-color: white;
+    font-weight: bolder;
+}
+
+.error-container {
+    padding: 1rem;
+    background-color: lightcoral;
+    border: 1px red solid;
+    border-radius: 10px;
+    list-style: none;
+}

@@ -11,7 +11,7 @@ exports.new_comment_GET = (req, res, next) => {
 
 //  New comment POST controller
 exports.new_comment_POST = [
-  body("text", "Cannot exceed 50 characters")
+  body("text", "Cannot exceed 100 characters")
     .trim()
     .isLength({ max: 100 })
     .escape(),
@@ -27,7 +27,7 @@ exports.new_comment_POST = [
     if (!errors.isEmpty()) {
       res.render("new-comment", {
         errors: errors.array(),
-        user: req.user.name,
+        user: req.user,
       });
     } else {
       await comment.save();

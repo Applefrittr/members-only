@@ -1,13 +1,14 @@
 extends layout 
 
 block content 
-  h1= `Become a member: ${user.username}`
-  hr 
-  form#membership(action="" method="POST")
+  form#membership.forms(action="" method="POST")
+    h1 Become a <em style="color: #00B7FF">Club Member</em>
+    h2(style="margin: 0")= `User: ${user.username}`
     label(for="code") What is the secret code?
     input(type="text" required name="code")
     button(type="submit") Submit
     a(href="/") Cancel
+    p.form-label The Clubhouse
   
   if errors
     ul

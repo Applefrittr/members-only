@@ -1,14 +1,15 @@
 extends layout 
 
 block content
-  h1= `New Comment for ${user.username}`
-  form#newComment(action="" method="POST")
+  form#newComment.forms(action="" method="POST")
+    h1= `New Comment for ${user.username}`
     label(for="text") Comment 
     textarea(name="text" required rows="5" cols="50")
     button(type="submit") Submit
-
+    a(href="/") Cancel
+    p.form-label The Clubhouse
   if errors
-    ul
+    ul.error-container
       for error in errors 
         li= error.msg
     
