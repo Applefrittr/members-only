@@ -11,5 +11,5 @@ block content
     a(href="/") Cancel
     p.form-label The Clubhouse
   
-  if session.messages.length > 0
+  if session.messages && session.messages.length > 0
     p.error-container= session.messages[session.messages.length - 1]
